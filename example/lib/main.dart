@@ -22,7 +22,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: FilamentView(),
+        body: Column(children:[
+          Text("Welcome"),
+          Expanded(child:FilamentView(onPlatformViewCreated: (int) {
+            print("Created platform view $int");
+          },)),])
       ),
     );
   }

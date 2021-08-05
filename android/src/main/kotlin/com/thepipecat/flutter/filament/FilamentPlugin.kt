@@ -20,12 +20,9 @@ class FilamentPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private var lifecycle: Lifecycle? = null
     private lateinit var pluginBinding: FlutterPlugin.FlutterPluginBinding
 
-    // FlutterPlugin
-
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(binding.binaryMessenger, "filament")
         channel.setMethodCallHandler(this)
-
         pluginBinding = binding
     }
 
@@ -33,17 +30,15 @@ class FilamentPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         channel.setMethodCallHandler(null)
     }
 
-    // MethodCallHandler
-
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         if (call.method == "getPlatformVersion") {
             result.success("Android ${android.os.Build.VERSION.RELEASE}")
+        } else if(call.method == "load") {
+
         } else {
             result.notImplemented()
         }
     }
-
-    // ActivityAware
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         lifecycle = (binding.lifecycle as? HiddenLifecycleReference)?.lifecycle

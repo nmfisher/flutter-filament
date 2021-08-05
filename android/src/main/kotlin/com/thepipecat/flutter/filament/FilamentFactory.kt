@@ -13,7 +13,7 @@ class FilamentFactory(
 ) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
         val builder = FilamentBuilder()
-
-        return builder.build(viewId, context, activity, binaryMessenger)
+        val controller = builder.build(viewId, context, activity, binaryMessenger);
+        return controller
     }
 }
